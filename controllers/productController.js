@@ -5,7 +5,8 @@ const User = require('../models/User');
 module.exports = {
 	createProduct: async (req, res) => {
 		const id = req.auth._id;
-		const { productName, description, price, category, brand, productImage } = req.body;
+		const { productName, description, price, category, brand } = req.body;
+		const productImage = req.file ? req.file.filename : null;
 
 		try {
 			const brandExist = await Brand.findById(brand);
@@ -18,7 +19,7 @@ module.exports = {
 			const newProduct = new Product({ product_name: productName, description, price, category, brand, product_image: productImage, added_by: id });
 			await newProduct.save();
 
-			return res.status(200).json({ message: 'Brand created successfully', result: { product: newProduct } });
+			return res.status(200).json({ message: 'Product created successfully', result: { product: newProduct } });
 		} catch (error) {
 			return res.status(500).json({ message: 'Server Error', error: error.message });
 		}
@@ -26,7 +27,8 @@ module.exports = {
 
 	editProduct: async (req, res) => {
 		const id = req.auth._id;
-		const { productName, description, price, category, brand, productImage, product_id } = req.body;
+		const { productName, description, price, category, brand, product_id } = req.body;
+		const productImage = req.file ? req.file.filename : null;
 
 		try {
 			const product = await Product.findById(product_id);
