@@ -3,7 +3,8 @@ const Brand = require('../models/Brand');
 module.exports = {
 	createBrand: async (req, res) => {
 		const id = req.auth._id;
-		const { brandName, brandLogo, categories } = req.body;
+		const { brandName, categories } = req.body;
+		const brandLogo = req.file ? req.file.filename : null;
 		try {
 			const brandExist = await Brand.findOne({ brandName });
 			if (brandExist) return res.status(401).json({ message: 'Brand Name Already Exist' });
