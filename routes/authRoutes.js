@@ -3,8 +3,8 @@ const {register, login, refreshAccessToken} = require('../controllers/authContro
 const upload = require('../middlewares/upload');
 const router = express.Router();
 
-router.post('/register', upload.single('profile_photo'), register);
-router.post('/login', login);
-router.post('/refresh', refreshAccessToken);
+router.post('/register', upload.single('profile_photo'), register); // Define register route
+router.post('/login', login); // Define login route
+router.post('/refresh', refreshAccessToken); // Define refresh route
 
 module.exports = router;

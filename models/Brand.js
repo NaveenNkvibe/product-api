@@ -8,6 +8,6 @@ const brandSchema = new mongoose.Schema(
 		user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 	},
 	{ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } },
-);
+); // Create a brand schema
 
 module.exports = Brand = mongoose.model('brands', brandSchema);

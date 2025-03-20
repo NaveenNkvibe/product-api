@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
 		blocked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 	},
 	{ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } },
-);
+); // Create a user schema
 
 userSchema.pre('save', async function (next) {
 	if(!this.isModified('password')) return next();
@@ -18,6 +18,6 @@ userSchema.pre('save', async function (next) {
 	const salt = await bcrypt.genSalt(10);
 	this.password = await bcrypt.hash(this.password, salt);
 	next();
-});
+}); // Middleware to hash password before saving to DB
 
 module.exports = User = mongoose.model('users', userSchema);
