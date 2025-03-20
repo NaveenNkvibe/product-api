@@ -9,19 +9,25 @@ const productRoutes = require('./routes/productRoutes');
 
 const app = express();
 
-dotenv.config();
-connectDB();
+dotenv.config(); // Load env variables
+connectDB(); // Connect to DB
 
-app.use(express.json());
-app.use(cookieParser());
+app.use(
+	cors({
+		origin: 'http://localhost:3000', // Allow frontend requests from this origin
+		credentials: true,
+	}),
+);
+app.use(express.json()); // Parses incoming JSON requests
+app.use(cookieParser()); // Parse cookies from incoming requests
 
-app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-app.use('/brand', brandRoutes);
-app.use('/product', productRoutes);
+app.use("/auth", authRoutes); // Handles Auth Routes
+app.use("/user", userRoutes);// Handles User Routes
+app.use('/brand', brandRoutes);// Handles Brand Routes
+app.use('/product', productRoutes);// Handles Product Routes
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // Check for PORT in .env, if not available set it to 5000
 app.listen(PORT, () => {
     console.log(`Server Running on Port: ${PORT}`)
-});
+}); // Starts server on specified port

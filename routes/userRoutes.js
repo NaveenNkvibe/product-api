@@ -3,10 +3,10 @@ const {getUser, deleteUser, editUser, blockUser, unBlockUser} = require('../cont
 const authProtect = require('../middlewares/auth')
 const router = express.Router();
 
-router.get('/', authProtect, getUser);
-router.put('/edit', authProtect, editUser);
-router.delete('/delete', authProtect, deleteUser);
-router.post('/block', authProtect, blockUser);
-router.post('/unblock', authProtect, unBlockUser);
+router.get('/', authProtect, getUser); // Define get user details route
+router.put('/edit', authProtect, editUser); // Define edit user route
+router.delete('/delete', authProtect, deleteUser); // Define delete user route
+router.post('/block', authProtect, blockUser); // Define block other user route
+router.post('/unblock', authProtect, unBlockUser); // Define unblock other user route
 
 module.exports = router;
